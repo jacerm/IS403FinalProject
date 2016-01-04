@@ -1,0 +1,34 @@
+﻿@model IEnumerable<FinalProject.Models.Data>
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Answer";
+}
+
+<h2>Answer</h2>
+
+@foreach (var item in Model)
+{
+	<p style="display:inline-block"><strong>User Name: </strong>@User.Identity.GetUserName()</p><p style="display:inline-block; margin-left: 15px;"><strong>Score: </strong>@ViewBag.userscore</p>
+	<p><strong>Question:</strong>@Html.DisplayFor(modelitem => item.QuestionText)</p>
+	<p><strong>Description: </strong>@Html.DisplayFor(modelitem => item.CategoryDesc)</p>
+	<ol><strong>Answers: </strong>
+		<li>@Html.DisplayFor(modelitem => item.Answer1)</li>
+		<li>@Html.DisplayFor(modelitem => item.Answer2)</li>
+		<li>@Html.DisplayFor(modelitem => item.Answer3)</li>
+		<li>@Html.DisplayFor(modelitem => item.Answer4)</li>
+	</ol>
+	
+	using (Html.BeginForm("NewAnswer", "Home", new { id = @Html.DisplayFor(modelitem => item.QuestionID) }, FormMethod.Post, null))
+	{
+			<hr />
+			<label for="inputAnswer" class="control-label col-md-2" style="margin-top: 15px;">Your Answer (as a number): </label>
+			<div class="col-md-10" style="margin-top: 15px;">
+				@Html.TextArea("NewAnswer", null, 5, 50, new { @class = "form-control" })
+			</div>
+			<div class="col-md-offset-2 col-md-10" style="margin-top: 15px;">
+				<button type="submit" class="btn btn-primary">Post New Answer</button>
+			</div>
+	}
+}
+
+

@@ -1,0 +1,18 @@
+﻿@model IEnumerable<FinalProject.Models.Data>
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Play";
+}
+
+<h2>Play</h2>
+<p style="display:inline-block"><strong>User Name: </strong>@User.Identity.GetUserName()</p><p style="display:inline-block; margin-left: 15px;"><strong>Score: </strong>@ViewBag.userscore</p>
+@{
+	int i = 1;
+}
+@foreach (var item in Model) 
+{
+	<p><strong>Question @i: </strong>@Html.DisplayFor(modelitem => item.QuestionText)</p><p style="display:inline-block"><strong>Category: </strong>@Html.DisplayFor(modelitem => item.CategoryDesc)</p>
+	<p><a href="@Url.Action("Answer", "Home", new { id = @Html.DisplayFor(modelitem => item.QuestionID) })" class="btn btn-primary btn-lg">Answer</a></p>
+	i++;
+}
+
